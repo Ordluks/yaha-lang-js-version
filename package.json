@@ -1,0 +1,28 @@
+{
+  "name": "yaha-lang",
+  "version": "1.0.0",
+  "description": "Functional programming language",
+  "main": "webpack.config.js",
+  "scripts": {
+    "format": "node scripts/format"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ordluks/yaha-lang.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ordluks/yaha-lang/issues"
+  },
+  "homepage": "https://github.com/Ordluks/yaha-lang#readme",
+  "devDependencies": {
+    "@typescript-eslint/typescript-estree": "^5.43.0",
+    "glob": "^8.0.3",
+    "prettier": "2.7.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
