@@ -1,18 +1,9 @@
 const prettier = require('prettier')
-const glob = require('glob')
 const { concat } = require('lodash')
 const { writeFile } = require('fs/promises')
-const { readFileAsText, readJSON } = require('./_utils.js')
+const { readFileAsText, readJSON, getAllFilesPathes } = require('./_utils.js')
 
-const includeFiles = ['src/**/*.ts', 'scripts/*.js', 'webpack.config.js']
-
-const getAllFilesPathes = (pattern) =>
-  new Promise((resolve, reject) => {
-    glob(pattern, (err, files) => {
-      if (err) reject(err)
-      resolve(files)
-    })
-  })
+const includeFiles = ['src/**/*.ts', 'tests/**/*.ts', 'scripts/*.js', 'webpack.config.js']
 
 const formatAllFiles = async () => {
   const configFile = await prettier.resolveConfigFile('.prettierrc.json')
