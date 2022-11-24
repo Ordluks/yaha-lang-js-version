@@ -9,7 +9,6 @@ const runningTests = async (mocha) =>
   })
 
 const test = async () => {
-  process.env.TS_NODE_COMPILER_OPTIONS = '{"module": "commonjs"}'
   const mocha = new Mocha()
 
   const allTests = await getAllFilesPathes(includingTests)

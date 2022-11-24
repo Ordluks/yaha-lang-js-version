@@ -1,2 +1,3 @@
-const msg: string = 'hi'
-console.log(msg)
+const main = () => {}
+
+main()
