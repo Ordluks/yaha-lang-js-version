@@ -1,5 +1,6 @@
-import { Token, TokenType } from './data'
 import { append, drop } from 'ramda'
+import { Token, TokenType } from './data'
+import { Step } from '.steps'
 
 type LexicalRulesObject = Record<TokenType, string>
 
@@ -8,10 +9,10 @@ const lexicalRules: LexicalRulesObject = {
   [TokenType.INTEGER]: '[0-9]+'
 }
 
-const lexer = (source: string): Token[] => {
+const lexer: Step<string, Token[]> = (source, raiseError) => {
   const matchToken = (pos: number, rules: [string, string][]): Token => {
     if (rules.length === 0) {
-      // error
+      raiseError(`unknown character ${source[pos]}`)
     }
     
     const [tokenType, pattern] = rules[0]
