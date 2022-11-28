@@ -1,6 +1,6 @@
 import { combineSteps } from './steps'
 import lexer from './lexer'
 
-const compiler = combineSteps(lexer)
+const yahaCompiler = combineSteps(lexer)
 
-export default compiler
+export default yahaCompiler

@@ -1,13 +1,13 @@
 import assert from 'assert'
-import { combineSteps, Step } from '../src/compiler/steps'
+import { combineSteps } from '../src/compiler/steps'
 
 describe('Compilation steps', () => {
   it('should return "foobar30"', () => {
-    const foo: Step<number, string> = (arg) => {
+    const foo = (arg: number) => {
       return String(arg + 5)
     }
     
-    const bar: Step<string, string> = (arg) => {
+    const bar = (arg: string) => {
       return 'foobar' + arg
     }
     

@@ -7,6 +7,7 @@ const config = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
+  target: 'node',
   resolve: {
     modules: [
       'node_modules',

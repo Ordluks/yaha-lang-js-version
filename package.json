@@ -24,6 +24,7 @@
     "@types/assert": "^1.5.6",
     "@types/lodash": "^4.14.189",
     "@types/mocha": "^10.0.0",
+    "@types/node": "^18.11.9",
     "@types/ramda": "^0.28.20",
     "@typescript-eslint/typescript-estree": "^5.43.0",
     "assert": "^2.0.0",
@@ -38,6 +39,7 @@
     "webpack-cli": "^5.0.0"
   },
   "dependencies": {
+    "commander": "^9.4.1",
     "lodash": "^4.17.21",
     "ramda": "^0.28.0"
   }

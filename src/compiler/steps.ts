@@ -1,19 +1,12 @@
 import { capitalize } from 'lodash'
 import { partialRight, pipe } from 'ramda'
 
-export type Step<A, R> = (arg: A, err: ErrorRaiser) => R
-export type ErrorRaiser = (msg: string) => never
-
-export const combineSteps = (...steps: Step<any, any>[]) => {
-  const preparedSteps = steps.map(step => {
-    const raiseError: ErrorRaiser = (msg: string) => {
-      console.log(`[${capitalize(step.name)}Error] - ${msg}`)
-      process.exit()
+export const combineSteps = (firstStep: (arg: any) => any, ...steps: ((arg: any) => any)[]) => (initial: Parameters<typeof firstStep>[0]) => {
+  return [firstStep, ...steps].reduce((last, step) => {
+    try {
+      return step(last)
+    } catch (error) {
+      console.log(`[${capitalize(step.name)}Error] - ${error.message}`)
     }
-    
-    return partialRight(step, [raiseError])
-  })
-  
-  // @ts-ignore
-  return pipe(...preparedSteps)
+  }, initial)
 }
