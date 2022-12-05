@@ -6,15 +6,15 @@ describe('Compilation steps', () => {
     const foo = (arg: number) => {
       return String(arg + 5)
     }
-    
+
     const bar = (arg: string) => {
       return 'foobar' + arg
     }
-    
+
     const result = combineSteps(foo, bar)(25)
     assert.equal(result, 'foobar30')
   })
-  
+
   /*it('should show test error', () => {
     const test: Step<null, void> = (arg, raiseError) => {
       raiseError('error for test')

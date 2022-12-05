@@ -3,7 +3,12 @@ const { concat } = require('lodash')
 const { writeFile } = require('fs/promises')
 const { readFileAsText, readJSON, getAllFilesPathes } = require('./_utils.js')
 
-const includeFiles = ['src/**/*.ts', 'tests/**/*.ts', 'scripts/*.js', 'webpack.config.js']
+const includeFiles = [
+  'src/**/*.ts',
+  'tests/**/*.ts',
+  'scripts/*.js',
+  'webpack.config.js'
+]
 
 const formatAllFiles = async () => {
   const configFile = await prettier.resolveConfigFile('.prettierrc.json')

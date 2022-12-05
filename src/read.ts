@@ -7,19 +7,21 @@ import { fileUnexists } from './templates'
 const YAHA_EXT = 'yh'
 const YAHA_EXT_REGEX = new RegExp(`\.${YAHA_EXT}$`)
 
-const checkExists = (path: string) => {
+
+export const checkYahaExt = (path: string) =>
+  YAHA_EXT_REGEX.test(path) ? path : `${path}.${YAHA_EXT}`
+
+export const checkExists = (path: string) => {
   const resolvedPath = resolve(path)
   if (!existsSync(resolvedPath)) {
-    throw fileUnexists({path: resolvedPath})
+    throw fileUnexists({ path: resolvedPath })
   }
-  
+
   return resolvedPath
 }
 
-const checkYahaExt = (path: string) => YAHA_EXT_REGEX.test(path) ? path : `${path}.${YAHA_EXT}`
-
 const read = (path: string) => readFile(path, 'utf-8')
 
-const readYahaFile = compose(read, checkYahaExt, checkExists)
+const readYahaFile = compose(read, checkExists, checkYahaExt)
 
 export default readYahaFile
