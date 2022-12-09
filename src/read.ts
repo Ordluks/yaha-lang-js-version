@@ -1,27 +1,20 @@
 import { existsSync } from 'fs'
 import { readFile } from 'fs/promises'
 import { resolve } from 'path'
-import { compose, partialRight } from 'ramda'
-import { fileUnexists } from './templates'
+import { compose } from 'ramda'
+import { invalidPath, fileUnexists } from './templates'
+import { YahaFileError } from './errors'
 
-const YAHA_EXT = 'yh'
-const YAHA_EXT_REGEX = new RegExp(`\.${YAHA_EXT}$`)
+export const YAHA_EXT = 'yh'
+export const YAHA_EXT_REGEX = new RegExp(`\.${YAHA_EXT}$`)
 
-
-export const checkYahaExt = (path: string) =>
-  YAHA_EXT_REGEX.test(path) ? path : `${path}.${YAHA_EXT}`
-
-export const checkExists = (path: string) => {
-  const resolvedPath = resolve(path)
-  if (!existsSync(resolvedPath)) {
-    throw fileUnexists({ path: resolvedPath })
-  }
-
-  return resolvedPath
+const readYahaFile = async (path: string) => {
+  if (!(/.+/.test(path))) throw new YahaFileError(invalidPath({path}))
+  
+  const programPath = YAHA_EXT_REGEX.test(path) ? path : `${path}.${YAHA_EXT}`
+  if (!existsSync(programPath)) throw new YahaFileError(fileUnexists({programPath}))
+  
+  return readFile(programPath, 'utf-8')
 }
-
-const read = (path: string) => readFile(path, 'utf-8')
-
-const readYahaFile = compose(read, checkExists, checkYahaExt)
 
 export default readYahaFile

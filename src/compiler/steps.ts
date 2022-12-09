@@ -1,5 +1,5 @@
-import { capitalize } from 'lodash'
-import { partialRight, pipe } from 'ramda'
+import { is } from 'ramda'
+import { YahaCompilerError } from '../errors'
 
 export const combineSteps =
   (firstStep: (arg: any) => any, ...steps: ((arg: any) => any)[]) =>
@@ -8,7 +8,7 @@ export const combineSteps =
       try {
         return step(last)
       } catch (error) {
-        console.log(`[${capitalize(step.name)}Error] - ${error.message}`)
+        throw is(String, error) ? new YahaCompilerError(error, step.name) : error
       }
     }, initial)
   }
